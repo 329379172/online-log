@@ -6,7 +6,8 @@
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "dev": "webpack-dev-server --port=8000 --host=0.0.0.0",
-    "start": "node ./src/transform.js"
+    "start": "node ./src/transform.js",
+    "build": "babel src -d lib"
   },
   "keywords": [
     "log"
@@ -32,8 +33,12 @@
     "core-js": "^2.4.1",
     "http": "0.0.0",
     "koa": "^2.0.0",
+    "moment": "^2.15.2",
     "ng2-bs3-modal": "^0.10.4",
     "rxjs": "5.0.0-beta.12",
+    "sails-mysql": "^0.11.5",
+    "sails-redis": "^0.10.7",
+    "waterline": "^0.11.5",
     "zone.js": "^0.6.25"
   },
   "devDependencies": {
@@ -42,6 +47,7 @@
     "@types/node": "^6.0.45",
     "angular2-template-loader": "^0.4.0",
     "awesome-typescript-loader": "^2.2.4",
+    "babel-cli": "^6.18.0",
     "babel-plugin-transform-runtime": "^6.15.0",
     "css-loader": "^0.23.1",
     "extract-text-webpack-plugin": "^1.0.1",

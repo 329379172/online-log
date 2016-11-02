@@ -6,7 +6,6 @@ const Koa = require('koa');
 
 const app = new Koa();
 
-
 app.use(async (ctx, next) => {
     try {
         await next(); // next is now a function
@@ -15,8 +14,6 @@ app.use(async (ctx, next) => {
         ctx.status = err.status || 500;
     }
 });
-
-
 
 app.use(async (ctx, next) => {
     try {

@@ -9,6 +9,13 @@ import {Router} from "@angular/router";
 @Component({
 	selector: 'UserNewComponent',
 	templateUrl: './user-new.component.html',
+	styles: [
+		` .newForm {
+				float: none;
+				margin: 0 auto;
+			}
+		`
+	]
 })
 export class UserNewComponent {
 

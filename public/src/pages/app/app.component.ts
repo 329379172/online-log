@@ -6,7 +6,7 @@ import { UserNewComponent } from '../user/user-new.component';
 @Component({
 	selector: 'my-app',
 	templateUrl: './app.component.html',
-	styles: [String(require('./app.component.css'))]
+	styleUrls: [(String)('./app.component.css')]
 })
 export class AppComponent {
 	constructor(private userNewComponent:UserNewComponent) {
@@ -15,6 +15,7 @@ export class AppComponent {
 	}
 
 	goCreateUser() {
+		
 	}
 
 }
