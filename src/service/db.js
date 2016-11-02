@@ -472,5 +472,13 @@ module.exports = {
     find: find,
     execute: execute,
     smartyAdd: smartyAdd,
-    smartySave: smartySave
+    smartySave: smartySave,
+
+
+    transactionAsync: transactionAsync,
+    selectAsync: selectAsync,
+    findAsync: findAsync,
+    smartyAddAsync: smartyAddAsync,
+    smartySaveAsync: smartySaveAsync,
+
 };
