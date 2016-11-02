@@ -58,7 +58,8 @@ module.exports = {
         }),
 
         new HtmlWebpackPlugin({
-            template: 'public/src/index.html'
+            template: 'public/src/index.html',
+            hash: true
         })
     ]
 };

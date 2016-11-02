@@ -7,7 +7,8 @@
     "test": "echo \"Error: no test specified\" && exit 1",
     "dev": "webpack-dev-server --port=8000 --host=0.0.0.0",
     "start": "node ./src/transform.js",
-    "build": "babel src -d lib"
+    "build": "babel src -d lib",
+    "build-client": "NODE_ENV=prodcution webpack"
   },
   "keywords": [
     "log"
@@ -33,7 +34,12 @@
     "core-js": "^2.4.1",
     "http": "0.0.0",
     "koa": "^2.0.0",
+    "koa-morgan": "^1.0.1",
+    "koa-router": "^7.0.1",
+    "koa-static": "^2.0.0",
+    "koa-static-cache": "^3.1.7",
     "moment": "^2.15.2",
+    "mysql": "^2.11.1",
     "ng2-bs3-modal": "^0.10.4",
     "rxjs": "5.0.0-beta.12",
     "sails-mysql": "^0.11.5",
@@ -67,6 +73,7 @@
     "style-loader": "^0.13.1",
     "typescript": "^2.0.3",
     "webpack": "^1.13.0",
+    "webpack-dashboard": "^0.2.0",
     "webpack-dev-server": "^1.14.1",
     "webpack-merge": "^0.14.0"
   }

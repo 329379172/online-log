@@ -3,26 +3,26 @@
  */
 
 const Koa = require('koa');
-
 const app = new Koa();
+const morgan = require('koa-morgan');
 
-app.use(async (ctx, next) => {
-    try {
-        await next(); // next is now a function
-    } catch (err) {
-        ctx.body = { message: err.message };
-        ctx.status = err.status || 500;
-    }
-});
+var path = require('path');
 
-app.use(async (ctx, next) => {
-    try {
-        await next();
-        ctx.status = 404;
-    } catch(err) {
-        next(err);
-    }
+const userRouter = require('./router/user');
+const routerMiddleWare = require('./middware/router');
 
+app.use(morgan('combined'));
+
+app.use(require('koa-static')(`${root}public/src`));
+
+app.use(userRouter.routes());
+
+app.use(routerMiddleWare.notFound);
+
+app.on('error', (err, ctx) => {
+    console.error(`server error `);
+    ctx.status = 500;
+    ctx.body = { message: err.message};
 });
 
 app.listen(3000, () => {
