@@ -10,10 +10,14 @@ var path = require('path');
 
 const userRouter = require('./router/user');
 const routerMiddleWare = require('./middware/router');
+const convert = require('koa-convert');
+const serve = require('koa-static');
 
 app.use(morgan('combined'));
 
-app.use(require('koa-static')(`${root}public/src`));
+console.log(__dirname + '/../public/dist');
+
+app.use(convert(serve(__dirname + '/../public/dist')));
 
 app.use(userRouter.routes());
 
