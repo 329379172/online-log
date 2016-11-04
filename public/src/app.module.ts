@@ -13,6 +13,7 @@ import { HttpModule} from '@angular/http';
 import {UserService} from "./pages/user/user.service";
 import {UserNewSuccessComponent} from "./pages/user/user-new-success.component";
 import {RouterModule} from "@angular/router";
+import {LogShowComponent} from "./pages/log/log-show.component";
 
 
 @NgModule({
@@ -28,7 +29,8 @@ import {RouterModule} from "@angular/router";
 		AppComponent,
 		UserNewComponent,
 		UserHelloComponent,
-		UserNewSuccessComponent
+		UserNewSuccessComponent,
+		LogShowComponent
 	],
 	providers: [
 		UserNewComponent,

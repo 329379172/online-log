@@ -9,6 +9,11 @@ import {ActivatedRoute} from "@angular/router";
 		h1 {
 			color: green;
 		}
+		 .margin-center {
+			float: none;
+			margin: 0 auto;
+		}
+
 	`],
 	templateUrl: './user-new-success.component.html'
 })

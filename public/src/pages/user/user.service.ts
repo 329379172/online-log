@@ -4,7 +4,7 @@
 
 import {Injectable} from "@angular/core";
 import {Http} from "@angular/http";
-import {User, UserResult} from "./user.model";
+import {User} from "./user.model";
 
 @Injectable()
 export class UserService {
@@ -13,18 +13,11 @@ export class UserService {
 		console.log(`this is user service!`);
 	}
 
-	createUser(user: User): Promise<UserResult> {
-		/*return <UserResult>this.http.post(`/api/user`, {
+	createUser(user: User){
+		return this.http.post(`/api/user`, {
 			username: user.username,
 			password: user.password
-		}).toPromise();*/
-		return new Promise((resolve, reject) => {
-			resolve({
-				code: 200,
-				data: 'http://indedied.com',
-				message: 'ok'
-			});
-		});
+		}).toPromise().then((response) => response.json());
 	}
 
 	setUserUrl(username: string, url: string): void {

@@ -14,6 +14,7 @@ import {Router} from "@angular/router";
 				float: none;
 				margin: 0 auto;
 			}
+		  
 		`
 	]
 })
@@ -34,10 +35,8 @@ export class UserNewComponent {
 		};
 		let result = this.userService.createUser(user);
 		let self = this;
-		result.then((result: UserResult) => {
+		result.then((result) => {
 			if(result.code == 200) {
-				//alert(`create success, ulr=${result.data}`)		} else {
-				//alert(`create fail, ${result.message}`);
 				self.userService.setUserUrl(f.value.username, result.data);
 				self.router.navigate(['user-new-success', {username: f.value.username}]);
 			}

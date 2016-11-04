@@ -2,18 +2,45 @@
  * Created by linfeiyang on 16-11-2.
  */
 
-const db = require('../service/db');
+const userService = require('../service/user');
 
-var createUser = (ctx, next) => {
-    console.log(ctx);
-    next();
+var createUser = async(ctx) => {
+    ctx.type = 'text/json';
+    try {
+        let body = ctx.request.body || {};
+        let username = body.username;
+        let password = body.password;
+        let result = await userService.createUser(username, password);
+        ctx.body = {
+            code: 200,
+            data: result,
+            systemTime: Date.now()
+        };
+        ctx.status = 200;
+    } catch (e) {
+        console.log(e);
+        ctx.message = e.message;
+        ctx.status = 400;
+    }
+
 };
 
-
-
-var getUser = (ctx, next) => {
-    ctx.body = 'hehe';
-    ctx.status = 200;
+var getUser = async(ctx) => {
+    ctx.type = 'text/json';
+    try {
+        let id = ctx.params.id;
+        let user = await userService.getUserById(id);
+        ctx.body = {
+            code: 200,
+            data: user,
+            systemTime: Date.now()
+        };
+        ctx.status = 200;
+    } catch (e) {
+        console.log(e);
+        ctx.message = e.message;
+        ctx.status = 400;
+    }
 };
 
 module.exports = {

@@ -8,18 +8,23 @@ const morgan = require('koa-morgan');
 
 var path = require('path');
 
-const userRouter = require('./router/user');
+const router = require('./router');
 const routerMiddleWare = require('./middware/router');
 const convert = require('koa-convert');
 const serve = require('koa-static');
+const koaBody   = require('koa-body');
+const logServer = require('./socket/log');
+
 
 app.use(morgan('combined'));
 
-console.log(__dirname + '/../public/dist');
-
 app.use(convert(serve(__dirname + '/../public/dist')));
 
-app.use(userRouter.routes());
+app.use(koaBody());
+
+app.use(routerMiddleWare.login);
+
+app.use(router.routes());
 
 app.use(routerMiddleWare.notFound);
 
@@ -29,6 +34,11 @@ app.on('error', (err, ctx) => {
     ctx.body = { message: err.message};
 });
 
-app.listen(3000, () => {
-    console.log(`listening 3000`);
+var server = require('http').createServer(app.callback());
+server.listen(3000, () => {
+    console.log('app listen 3000 port!');
 });
+logServer.listen(3001, () => {
+    console.log('socket listen 3001 port!');
+});
+

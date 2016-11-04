@@ -3,6 +3,7 @@ import {Routes, RouterModule} from "@angular/router";
 import {NgModule} from "@angular/core";
 import {UserHelloComponent} from "./user/user-hello.component";
 import {UserNewSuccessComponent} from "./user/user-new-success.component";
+import {LogShowComponent} from "./log/log-show.component";
 
 const routes:Routes = <Routes>[
 	{
@@ -16,6 +17,10 @@ const routes:Routes = <Routes>[
 	{
 		path: 'user-new-success',
 		component: UserNewSuccessComponent
+	},
+	{
+		path: 'log',
+		component: LogShowComponent
 	}
 ];
 @NgModule({
