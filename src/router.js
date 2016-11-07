@@ -15,4 +15,7 @@ router.post('/user', userAction.createUser);
 
 router.post('/log', logAction.createLog);
 
+//router.post('/login', userAction.login);
+
+
 module.exports = router;

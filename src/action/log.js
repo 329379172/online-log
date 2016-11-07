@@ -3,7 +3,6 @@
  */
 const logService = require('../service/log');
 
-
 var createLog = async(ctx) => {
     try {
         if (typeof ctx.userId == 'undefined' || !ctx.userId || parseInt(ctx.userId) <= 0) {
@@ -15,6 +14,13 @@ var createLog = async(ctx) => {
             }
             data.userId = ctx.userId;
             let result = await logService.createLog(data);
+            if(!result) {
+                throw new Error('添加日志失败');
+            }
+            global.store.push({
+                username: ctx.user.username,
+                msg: data
+            });
             ctx.status = 200;
             ctx.body = {
                 code: 200,
@@ -32,7 +38,6 @@ var createLog = async(ctx) => {
         };
     }
 };
-
 
 module.exports = {
     createLog: createLog

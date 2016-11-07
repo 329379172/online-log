@@ -43,7 +43,18 @@ var getUser = async(ctx) => {
     }
 };
 
+/*var login = async() => {
+    ctx.type = 'text/json';
+    ctx.body = {
+        code: 200,
+        data: null,
+        message: '暂不支持',
+        systemTime: Date.now()
+    };
+};*/
+
 module.exports = {
     createUser: createUser,
-    getUser: getUser
+    getUser: getUser,
+    //login: login
 };

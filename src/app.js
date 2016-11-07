@@ -13,8 +13,7 @@ const routerMiddleWare = require('./middware/router');
 const convert = require('koa-convert');
 const serve = require('koa-static');
 const koaBody   = require('koa-body');
-const logServer = require('./socket/log');
-
+var store = require('./service/store');
 
 app.use(morgan('combined'));
 
@@ -35,10 +34,39 @@ app.on('error', (err, ctx) => {
 });
 
 var server = require('http').createServer(app.callback());
-server.listen(3000, () => {
-    console.log('app listen 3000 port!');
-});
-logServer.listen(3001, () => {
-    console.log('socket listen 3001 port!');
+var io = require('socket.io')(server);
+let connections = [];
+io.sockets.on('connection', (socket) => {
+    connections.push(socket);
+    console.log(`Connected: ${connections.length} sockets connected`);
+    socket.on('disconnect', (close) => {
+        console.log(close);
+        console.log(`disconnection`);
+        connections.splice(connections.indexOf(socket), 1);
+        console.log(`Connected: ${connections.length} sockets connected`);
+    });
+    socket.on('send message', (data) => {
+        console.log(data);
+        io.sockets.emit('new message', {msg: data});
+    });
+
+
+
 });
 
+global.store = [];
+
+var p = new Proxy(global.store, {
+    push: function(target, name){
+        return name in target?
+            target[name] :
+            37;
+    }
+});
+
+global.store = p;
+
+
+server.listen(3000, () => {
+    console.info('app listen 3000 port!');
+});

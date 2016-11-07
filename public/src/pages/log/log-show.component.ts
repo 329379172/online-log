@@ -2,6 +2,7 @@
  * Created by linfeiyang on 16-11-3.
  */
 import {Component} from "@angular/core";
+import * as io from 'socket.io-client'
 @Component({
 	templateUrl: './log-show.component.html',
 	styles: [
@@ -18,19 +19,12 @@ import {Component} from "@angular/core";
 export class LogShowComponent {
 
 	logs: any[] = [];
-
 	constructor() {
 		console.log(`this is log show component!`);
 	}
 
 	ngOnInit() {
-		console.log('ng on init');
-		this.logs = [
-			'hehe',
-			'haha'
-		];
+		var socket = io.connect('localhost:3000');
+		socket.emit('send message', "hehe");
 	}
-
-
-
 }
