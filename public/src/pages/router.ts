@@ -19,7 +19,7 @@ const routes:Routes = <Routes>[
 		component: UserNewSuccessComponent
 	},
 	{
-		path: 'log',
+		path: 'log/:username',
 		component: LogShowComponent
 	}
 ];

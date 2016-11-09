@@ -24,7 +24,7 @@ export class UserNewComponent {
 		console.log(`this is user new component`);
 	}
 
-	onSubmit(f: NgForm) {
+	async onSubmit(f: NgForm) {
 		if(!f.valid) {
 			alert('check params fail!');
 			return;
@@ -33,9 +33,11 @@ export class UserNewComponent {
 			username: f.value.username,
 			password: f.value.password
 		};
-		let result = this.userService.createUser(user);
+		let result = await this.userService.createUser(user);
 		let self = this;
-		result.then((result) => {
+		self.userService.setUserUrl(f.value.username, result.data);
+		self.router.navigate(['user-new-success', {username: f.value.username}]);
+		/*result.then((result) => {
 			if(result.code == 200) {
 				self.userService.setUserUrl(f.value.username, result.data);
 				self.router.navigate(['user-new-success', {username: f.value.username}]);
@@ -43,6 +45,6 @@ export class UserNewComponent {
 		}).catch((e) => {
 			console.error(e);
 			alert(`create fail!`);
-		});
+		});*/
 	}
 }

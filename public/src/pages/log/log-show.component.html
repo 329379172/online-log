@@ -2,7 +2,9 @@
     <div class="newForm col-lg-5 col-md-8">
         <table class="table table-hover">
             <tr *ngFor="let log of logs">
-                <td>log</td>
+                <td>{{log.level}}</td>
+                <td>{{log.content}}</td>
+                <td>{{log.timestamp}}</td>
             </tr>
         </table>
     </div>

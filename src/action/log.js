@@ -17,9 +17,11 @@ var createLog = async(ctx) => {
             if(!result) {
                 throw new Error('添加日志失败');
             }
-            global.store.push({
+            global.xiaoqiuLogs.push({
                 username: ctx.user.username,
-                msg: data
+                level: data.level || 'info',
+                content: data.content,
+                timestamp: Date.now()
             });
             ctx.status = 200;
             ctx.body = {

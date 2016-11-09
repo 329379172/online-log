@@ -17,7 +17,9 @@ export class UserService {
 		return this.http.post(`/api/user`, {
 			username: user.username,
 			password: user.password
-		}).toPromise().then((response) => response.json());
+		}).map((response) => {
+			return response.json();
+		}).toPromise();
 	}
 
 	setUserUrl(username: string, url: string): void {
