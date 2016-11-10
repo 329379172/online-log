@@ -5,7 +5,6 @@ const morgan = require('koa-morgan');
 
 var path = require('path');
 import session from 'koa-session2';
-var RedisStore = require('koa-redis');
 const router = require('./router');
 const routerMiddleWare = require('./middware/router');
 const convert = require('koa-convert');
