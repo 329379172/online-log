@@ -14,7 +14,7 @@ const koaBody   = require('koa-body');
 
 app.use(session());
 
-//app.use(morgan('combined'));
+app.use(morgan('combined'));
 
 app.use(convert(serve(__dirname + '/../public/dist')));
 

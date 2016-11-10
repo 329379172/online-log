@@ -3,6 +3,7 @@
  */
 import {Component} from "@angular/core";
 import * as io from 'socket.io-client'
+import * as moment from 'moment';
 import {ActivatedRoute} from "@angular/router";
 @Component({
 	templateUrl: './log-show.component.html',
@@ -13,7 +14,11 @@ import {ActivatedRoute} from "@angular/router";
 			}
 		main {
 	        margin: 0 !important;
+			padding: 0;
 	    }
+		.col-md-12 {
+			padding: 0;
+		}
 		`
 	]
 })
@@ -35,10 +40,12 @@ export class LogShowComponent {
 
 		this.socket.emit('set username', this.username);
 
-		this.socket.on('new log', (logData: any) => { //have new log!
+		this.socket.on('new log', (logData: any) => { //来新的日志了!
 			if(!!logData) {
-				console.log(logData);
+				logData.timestamp = moment(logData.timestamp).format('YYYY-MM-DD HH:mm:ss');
 				this.logs.splice(0, 0, logData);
+				if(this.logs.length > 50) this.logs.splice(50,this.logs.length - 50);  //超出50条后清理最老的日志
+				
 			} else {
 				console.log('log data is empty!');
 			}
