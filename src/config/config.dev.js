@@ -3,7 +3,7 @@
  */
 module.exports = {
     db: {
-        host: '123.57.144.6',
+        host: '127.0.0.1',
         user: 'root',
         password: '123456',
         database: 'logs'
