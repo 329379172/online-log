@@ -11,7 +11,6 @@
  */
 var pool = require('../lib/mysql-pool');
 var async = require('async');
-var logger = require('../lib/logger');
 
 
 var transactionAsync = (fnlist) => {
@@ -132,7 +131,6 @@ var select = function (data, callback) {
     pool.getConnection(function (err, conn) {
         if (err) return callback(err);
         conn.query(sql, options, function (err, result) {
-            logger.log('info', sql, {params: options});
             conn.release();
             callback(err, result);
         });
@@ -148,7 +146,6 @@ var find = function () {
         pool.getConnection(function (err, conn) {
             if (err) return callback(err);
             conn.query(sql, options, function (err, result) {
-                logger.log('info', sql, {params: options});
                 conn.release();
                 if (err) return callback(err);
                 if (result && result.length > 0) {
@@ -164,7 +161,6 @@ var find = function () {
         options = arguments[2];
         callback = arguments[3];
         conn.query(sql, options, function (err, result) {
-            logger.log('info', sql, {params: options});
             if (err) return callback(err);
             if (result && result.length > 0) {
                 return callback(err, result[0]);
@@ -200,7 +196,6 @@ var execute = function () {
         pool.getConnection(function (err, conn) {
             if (err) return callback(err);
             conn.query(sql, options, function (err, result) {
-                logger.log('info', sql, {params: options});
                 conn.release();
                 callback(err, result);
             });
@@ -211,7 +206,6 @@ var execute = function () {
         options = arguments[2];
         callback = arguments[3];
         conn.query(sql, options, function (err, result) {
-            logger.log('info', sql, {params: options});
             callback(err, result);
         });
     } else {
