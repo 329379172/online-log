@@ -10,6 +10,7 @@ RUN npm install
 RUN npm run build-client
 RUN apk del python make gcc
 RUN npm install babel-cli -g
+RUN npm install typings -g && typings install
 RUN npm run build && npm prune --production
 EXPOSE 3000
 CMD ["npm", "start"]
