@@ -34,7 +34,8 @@ export class LogShowComponent {
 	async ngOnInit() {
 		this.username = await this.getUsername();
 		console.log(`this username=${this.username}`);
-		this.socket = io.connect('localhost:3000', () => {
+		
+		this.socket = io.connect(`${location.host}:3000`, () => {
 			console.log('connection');		
 		});
 
