@@ -13,7 +13,7 @@ const koaBody   = require('koa-body');
 
 app.use(session());
 
-app.use(morgan('combined'));
+//app.use(morgan('combined'));
 
 app.use(convert(serve(__dirname + '/../public/dist')));
 
@@ -81,7 +81,6 @@ io.sockets.on('connection', (socket) => {
 
 var sendLog = (value) => {
     let username = value.username;
-    console.log(`username=` + username);
     if(!users[username] || users[username].length <= 0) {
         return;
     }

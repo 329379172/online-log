@@ -35,9 +35,18 @@ export class LogShowComponent {
 		this.username = await this.getUsername();
 		console.log(`this username=${this.username}`);
 		let self = this;
-		this.socket = io.connect(`${location.host}:3000`, () => {
-			console.log('connection');
-			self.socket.emit('set username', this.username);
+		this.socket = io.connect(location.host);
+
+		console.log(location.host);
+
+		this.socket.on('connect', () => {
+			console.log(`has connected`);
+			this.socket.emit('set username', this.username);
+		});
+
+		this.socket.on('reconnect', () => {
+			console.log(`has reconnected`);
+			this.socket.emit('set username', this.username);
 		});
 
 
@@ -45,8 +54,8 @@ export class LogShowComponent {
 		this.socket.on('new log', (logData: any) => { //来新的日志了!
 			if(!!logData) {
 				logData.timestamp = moment(logData.timestamp).format('YYYY-MM-DD HH:mm:ss');
-				this.logs.splice(0, 0, logData);
-				if(this.logs.length > 50) this.logs.splice(50,this.logs.length - 50);  //超出50条后清理最老的日志
+				self.logs.splice(0, 0, logData);
+				if(self.logs.length > 50) self.logs.splice(50,this.logs.length - 50);  //超出50条后清理最老的日志
 				
 			} else {
 				console.log('log data is empty!');
