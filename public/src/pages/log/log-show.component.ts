@@ -34,12 +34,13 @@ export class LogShowComponent {
 	async ngOnInit() {
 		this.username = await this.getUsername();
 		console.log(`this username=${this.username}`);
-		
+		let self = this;
 		this.socket = io.connect(`${location.host}:3000`, () => {
-			console.log('connection');		
+			console.log('connection');
+			self.socket.emit('set username', this.username);
 		});
 
-		this.socket.emit('set username', this.username);
+
 
 		this.socket.on('new log', (logData: any) => { //来新的日志了!
 			if(!!logData) {

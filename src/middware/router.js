@@ -14,7 +14,7 @@ var notFound = async (ctx) => {
 var login = async (ctx, next) => {
     if (!!ctx.query.token) {
         let user = await userService.getUserByToken(ctx.query.token);
-        if(user.id > 0) {
+        if(!!user && user.id > 0) {
             ctx.userId = user.id;
             ctx.user = user;
         }
