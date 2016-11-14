@@ -33,6 +33,7 @@ export class LogShowComponent {
 
 	async ngOnInit() {
 		this.username = await this.getUsername();
+		document.title = `${this.username}的即时日志`;
 		console.log(`this username=${this.username}`);
 		let self = this;
 		this.socket = io.connect(location.host);

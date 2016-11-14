@@ -212,6 +212,21 @@ var execute = function () {
         throw new Error('arguments count is not match!');
     }
 };
+
+
+
+var executeAsync = async (sql, options) => {
+    return new Promise(async (resolve, reject) => {
+        let conn = await pool.getConnAsync();
+        if(!conn) return reject('无法获取到数据库连接');
+        conn.query(sql, options, (err, res) => {
+            if(err) return reject(err);
+            resolve(res);
+        });
+    });
+};
+
+
 /**
  * 直接根据数据模型将数据插入数据库
  * @param data data
@@ -403,6 +418,7 @@ module.exports = {
     transactionAsync: transactionAsync,
     findAsync: findAsync,
     smartyAddAsync: smartyAddAsync,
-    smartySaveAsync: smartySaveAsync
+    smartySaveAsync: smartySaveAsync,
+    executeAsync: executeAsync
 
 };
