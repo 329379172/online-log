@@ -91,7 +91,4 @@ var sendLog = (value) => {
     //global.xiaoqiuStore.splice(global.xiaoqiuStore.indexOf(log), 1);
 };
 
-
-server.listen(3000, () => {
-    console.info('app listen 3000 port!');
-});
+module.exports = server;

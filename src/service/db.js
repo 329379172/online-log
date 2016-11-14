@@ -215,13 +215,14 @@ var execute = function () {
 
 
 
-var executeAsync = async (sql, options) => {
+var executeAsync = (sql, options) => {
     return new Promise(async (resolve, reject) => {
-        let conn = await pool.getConnAsync();
-        if(!conn) return reject('无法获取到数据库连接');
-        conn.query(sql, options, (err, res) => {
+        pool.getConnection((err, conn) => {
             if(err) return reject(err);
-            resolve(res);
+            conn.query(sql, options, (err, res) => {
+                if(err) return reject(err);
+                resolve(res.affectedRows);
+            });
         });
     });
 };

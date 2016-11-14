@@ -47,11 +47,9 @@ export class LogShowComponent {
 
 		this.socket.on('reconnect', () => {
 			console.log(`has reconnected`);
-			this.socket.emit('set username', this.username);
+			//this.socket.emit('set username', this.username);
 		});
-
-
-
+		
 		this.socket.on('new log', (logData: any) => { //来新的日志了!
 			if(!!logData) {
 				logData.timestamp = moment(logData.timestamp).format('YYYY-MM-DD HH:mm:ss');

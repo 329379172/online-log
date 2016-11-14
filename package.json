@@ -7,7 +7,7 @@
     "test": "echo \"Error: no test specified\" && exit 1",
     "dev": "webpack-dev-server --port=8000 --host=0.0.0.0",
     "start": "node ./lib/app.js",
-    "build-server": "babel src -d lib",
+    "build-server": "babel src -d lib -s",
     "build-client": "webpack --config=./public/config/webpack.prod.js"
   },
   "keywords": [
